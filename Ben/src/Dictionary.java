@@ -24,7 +24,7 @@ public class Dictionary {
         }
     }
 
-// normalizes word
+    // normalizes word
     public String normalize(String word) {
         String result = "";
         word = word.toLowerCase();
@@ -93,10 +93,10 @@ public class Dictionary {
                 //System.out.println(currentVert.data);
             }
         }
-            catch(ArrayIndexOutOfBoundsException e)
-            {
-                System.out.println(position);
-            }
+        catch(ArrayIndexOutOfBoundsException e)
+        {
+            System.out.println(position);
+        }
 
         if (chainCounter >= 16) {
             System.out.println("Maximum number of collisions reached");
@@ -121,33 +121,33 @@ public class Dictionary {
         return numberOfEntries;
     }
 
-        public String getlongestChain() {
-            int longestChain = 0;
-            ArrayList<String> longestChainArray = new ArrayList<>();
-            for (int i = 0; i < hashtable.length; i++) {
-                int tempCount = 0;
-                ArrayList<String> tempChainArray = new ArrayList<>();
-                for (Vertex element : hashtable) {
-                    Vertex v = hashtable[i];
+    public String getlongestChain() {
+        int longestChain = 0;
+        ArrayList<String> longestChainArray = new ArrayList<>();
+        for (int i = 0; i < hashtable.length; i++) {
+            int tempCount = 0;
+            ArrayList<String> tempChainArray = new ArrayList<>();
+            for (Vertex element : hashtable) {
+                Vertex v = hashtable[i];
 
-                    while (v != null) {
-                        tempChainArray.add(v.data);
-                        v = v.next;
-                        tempCount++;
-                    }
+                while (v != null) {
+                    tempChainArray.add(v.data);
+                    v = v.next;
+                    tempCount++;
                 }
-                if (tempCount > longestChain) {
-
-                    longestChain = tempCount;
-                }
-                if (tempChainArray.size() > longestChainArray.size()) {
-                    longestChainArray = tempChainArray;
-                }
-
             }
-            String output = longestChain + longestChainArray.toString();
-            return output;
+            if (tempCount > longestChain) {
+
+                longestChain = tempCount;
+            }
+            if (tempChainArray.size() > longestChainArray.size()) {
+                longestChainArray = tempChainArray;
+            }
+
         }
+        String output = longestChain + longestChainArray.toString();
+        return output;
+    }
 
     private void resizeHashTable() {
         Vertex[] neu = new Vertex[hashtable.length*2];
@@ -161,6 +161,6 @@ public class Dictionary {
             while (x != null) {
                 addObject(element.data);
                 x = x.next;}
-            }
         }
     }
+}
