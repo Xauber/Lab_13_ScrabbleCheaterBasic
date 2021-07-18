@@ -2,6 +2,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashSet;
 
+
 public class ScrabbleCheater {
         public static void main(String[] args) throws IOException {
             WordParser parser = new WordParser();
@@ -13,11 +14,12 @@ public class ScrabbleCheater {
             for (String name : words) {
                 dictionary.addObject(dictionary.normalize(name));
             }
+            System.out.println(parser.getCounter());
+            System.out.println(dictionary.getlongestChain());
+
             //System.out.println(dictionary.generateHashCode("Hallo"));
-            System.out.println(dictionary.getObject("Hallo"));
+            //System.out.println(dictionary.getObject("Hallo"));
             //System.out.println(dictionary.getlongestChain());
 
-            //System.out.println(dictionary.getlongestChain());
-            //System.out.println(parser.getCounter());
         }
 }

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Scanner;
 
+// just the word parser used to read in a file
 public class WordParser {
 
     int counter = 0;

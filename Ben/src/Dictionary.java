@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+
 public class Dictionary {
     public Vertex [] hashtable;
 
@@ -12,6 +13,7 @@ public class Dictionary {
         hashtable = new Vertex[size];
     }
 
+    // Vertex class to later access all the collisions and permutations chained --> like a linked list
     public class Vertex {
         String data;
         Vertex previous;
@@ -24,7 +26,7 @@ public class Dictionary {
         }
     }
 
-    // normalizes word
+    // normalizes the word & sorts it aswell, so that every permutation will later have the same hashcode
     public String normalize(String word) {
         String result = "";
         word = word.toLowerCase();
@@ -38,7 +40,7 @@ public class Dictionary {
 
     }
 
-
+    // method to generate a hashcode for a word / reused the code from the lecture
     public long generateHashCode(String s) {
         long hashCode = 0;
         for (int i = 0; i < s.length(); i++) {
@@ -50,7 +52,8 @@ public class Dictionary {
         return hashCode;
     }
 
-
+    // method to search for a word in the dict and get the chain of words that are permutations or just are collisions,
+    // having the same hashcode
     public String getObject(String word) {
         long hashCode = generateHashCode(word);
         ArrayList<String> output = new ArrayList<>();
@@ -71,6 +74,8 @@ public class Dictionary {
 
     }
 
+
+    // method to add a word to the hashtable based on its hashcode, if there are too many collisions the hashtable resizes
     public void addObject(String word) {
         int position = (int) (generateHashCode(word) % hashtable.length);
         int chainCounter = 0;
@@ -95,17 +100,21 @@ public class Dictionary {
         }
         catch(ArrayIndexOutOfBoundsException e)
         {
-            System.out.println(position);
+            //System.out.println(position);
         }
 
         if (chainCounter >= 16) {
-            System.out.println("Maximum number of collisions reached");
+            //System.out.println("Maximum number of collisions reached");
             resizeHashTable();
 
         }
-        System.out.println(chainCounter);
+        //System.out.println(chainCounter);
     }
 
+
+    // method to get number of entries of the dictionary should normally be equal to the count I implemented for the WordParser
+    // therefore this is not really needed, but I realized too late that the counter inside WordParser is much easier,
+    // and would have saved some time
     public int getTableEntries() {
         int numberOfEntries = 0;
 
@@ -121,6 +130,7 @@ public class Dictionary {
         return numberOfEntries;
     }
 
+    //method to get the longest collision chain of the dictionary
     public String getlongestChain() {
         int longestChain = 0;
         ArrayList<String> longestChainArray = new ArrayList<>();
@@ -149,6 +159,7 @@ public class Dictionary {
         return output;
     }
 
+    // method to double the size of the hashtable
     private void resizeHashTable() {
         Vertex[] neu = new Vertex[hashtable.length*2];
         Vertex[] alt = hashtable;
